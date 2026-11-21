@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mikeybox Custom Themes — Sakura Edition</title>
+  <style>
+    :root {
+      --bg-color: #120a14;
+      --card-bg: rgba(28, 16, 32, 0.75);
+      --border-color: rgba(244, 114, 182, 0.25);
+      --accent-pink: #f472b6;
+      --accent-glow: rgba(244, 114, 182, 0.35);
+      --text-main: #fce7f3;
+      --text-sub: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Sakura Petals Background Animation */
+    .petals-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      background: radial-gradient(circle, #ffb6c1 0%, #ff69b4 100%);
+      border-radius: 150% 0 150% 0;
+      animation: fall linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(110vh) translateX(100px) rotate(360deg);
+        opacity: 0.2;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* Top Badge */
+    .top-badge-wrapper {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(244, 114, 182, 0.12);
+      border: 1px solid rgba(244, 114, 182, 0.35);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #f9a8d4;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.2);
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: #f472b6;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #f472b6;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 30%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content h1 span {
+      background: linear-gradient(135deg, #f472b6, #db2777);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-content p {
+      font-size: 16px;
+      color: var(--text-sub);
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 25px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f472b6, #db2777);
+      color: white;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(244, 114, 182, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(244, 114, 182, 0.6);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      font-weight: 600;
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(244, 114, 182, 0.4);
+    }
+
+    .sub-browser-text {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-left: 4px;
+    }
+
+    .meta-info {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      color: #94a3b8;
+      align-items: center;
+    }
+
+    .meta-info b {
+      color: var(--text-main);
+    }
+
+    /* Preview Card */
+    .hero-preview {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+    }
+
+    .preview-browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 12px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #22c55e; }
+
+    .browser-url {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: #94a3b8;
+      flex: 1;
+      text-align: center;
+    }
+
+    .preview-screen {
+      background: #09050b;
+      border-radius: 12px;
+      padding: 20px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(244, 114, 182, 0.15);
+    }
+
+    .preview-screen h3 {
+      color: #f472b6;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .preview-screen p {
+      color: #cbd5e1;
+      font-size: 13px;
+      text-align: center;
+      max-width: 320px;
+    }
+
+    /* Editor Tweaks & Features Section */
+    .section-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(12px);
+    }
+
+    .section-box h2 {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+
+    .tweaks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .tweak-item {
+      background: rgba(20, 10, 24, 0.6);
+      border: 1px solid rgba(244, 114, 182, 0.15);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #fbcfe8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tweak-item::before {
+      content: "✦";
+      color: #f472b6;
+      font-size: 12px;
+    }
+
+    /* Tutorial Section */
+    .tutorial-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .tutorial-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tutorial-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .step-card {
+      background: rgba(20, 10, 24, 0.6);
+      border: 1px solid rgba(244, 114, 182, 0.2);
+      padding: 16px 20px;
+      border-radius: 12px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      background: linear-gradient(135deg, #f472b6, #db2777);
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 13px;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(244, 114, 182, 0.4);
+    }
+
+    .step-content h4 {
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+
+    .step-content p {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    .video-wrapper {
+      background: #09050b;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      display: block;
+    }
+
+    /* Q&A Section */
+    .qa-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .qa-item {
+      background: rgba(20, 10, 24, 0.6);
+      border: 1px solid rgba(244, 114, 182, 0.15);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .qa-item h4 {
+      font-size: 16px;
+      color: #f9a8d4;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qa-item p {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* Other Extensions Button Area */
+    .extensions-action-box {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .btn-other {
+      background: rgba(244, 114, 182, 0.15);
+      border: 1px solid #f472b6;
+      color: #fbcfe8;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+      box-shadow: 0 0 20px rgba(244, 114, 182, 0.2);
+      text-decoration: none;
+    }
+
+    .btn-other:hover {
+      background: rgba(244, 114, 182, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(244, 114, 182, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.6;
+      background: rgba(10, 5, 12, 0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Sakura Petals -->
+  <div class="petals-container" id="petals"></div>
+
+  <div class="container">
+    
+    <!-- Top Badge -->
+    <div class="top-badge-wrapper">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Chrome extension — powered by Gemini
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-content">
+        <h1>mikeybox custom themes: <span>powered by gemini</span></h1>
+        <p>Transform your Mikeybox editing workspace with gorgeous animated sakura themes, deep custom styles, and AI-powered enhancements. Bring spring cherry blossoms right into your creative studio.</p>
+        
+        <div class="cta-group">
+          <div class="cta-buttons">
+            <a href="mikeybox-toolkit.zip" class="btn-primary" download>
+              ⬇ Download for Chrome — It's Free
+            </a>
+            <a href="#tutorial-section" class="btn-secondary">
+              See How It Works ↓
+            </a>
+          </div>
+          <span class="sub-browser-text">based for all browsers (Chrome, Edge, Brave, Opera, Firefox)</span>
+        </div>
+
+        <div class="meta-info">
+          <div><b>Chrome 111+</b> / Edge / Brave</div>
+          <div><b>v8.2.0</b> • 96 KB</div>
+          <div><b>14 files</b> unzipped</div>
+        </div>
+      </div>
+
+      <div class="hero-preview">
+        <div class="preview-browser-bar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <div class="browser-url">prime.mikeybox.ai</div>
+        </div>
+        <div class="preview-screen">
+          <h3>🌸 Sakura Studio AI</h3>
+          <p>Over 111+ high-detail animated themes, custom shaders, and instant workspace customization.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Editor Tweaks Section -->
+    <section class="section-box">
+      <h2>Advanced Editor Tweaks & Customization</h2>
+      <p style="color: var(--text-sub); font-size: 14px; margin-bottom: 10px;">Fine-tune every single detail of your editor workspace with our comprehensive tweaking suite:</p>
+      
+      <div class="tweaks-grid">
+        <div class="tweak-item">Panel Opacity</div>
+        <div class="tweak-item">Backdrop Blur</div>
+        <div class="tweak-item">Corner Radius</div>
+        <div class="tweak-item">Text Size</div>
+        <div class="tweak-item">Thumbnail Width</div>
+        <div class="tweak-item">Custom Fonts</div>
+        <div class="tweak-item">Compact Spacing</div>
+        <div class="tweak-item">Neon Glow Effects</div>
+        <div class="tweak-item">Reduce Motion</div>
+        <div class="tweak-item">Long Declutter List</div>
+        <div class="tweak-item">Streamer Masking</div>
+        <div class="tweak-item">Custom Asset Loader</div>
+      </div>
+    </section>
+
+    <!-- Tutorial Section -->
+    <section class="section-box" id="tutorial-section">
+      <h2 style="margin-bottom: 8px;">How to Install & Setup</h2>
+      <p style="color: var(--text-sub); font-size: 14px; margin-bottom: 24px;">Follow these step-by-step numbered instructions to install the extension on your browser.</p>
+
+      <div class="tutorial-grid">
+        <div class="tutorial-steps-list">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Unzip the Download</h4>
+              <p>Extract the downloaded ZIP archive (`mikeybox-toolkit.zip`) to a folder on your computer so browsers can read the manifest and source files.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Open Extensions Page</h4>
+              <p>Navigate to `chrome://extensions` (or `edge://extensions`, `brave://extensions`) in your browser address bar.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Enable Developer Mode</h4>
+              <p>Toggle the <b>Developer mode</b> switch in the top-right corner of the extensions page.</p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Load Unpacked Folder</h4>
+              <p>Click <b>Load unpacked</b> and select the extracted folder containing `manifest.json`. You're all set!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-wrapper">
+          <video controls autoplay muted loop>
+            <source src="video_1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q&A Section -->
+    <section class="section-box">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="qa-list">
+        <div class="qa-item">
+          <h4>Q: Is this extension safe to use in my browser?</h4>
+          <p>A: Yes! The extension runs completely locally in your browser, utilizing open-source manifest standards without tracking personal data or passwords.</p>
+        </div>
+
+        <div class="qa-item">
+          <h4>Q: How do I switch between different Sakura themes?</h4>
+          <p>A: Once installed, click the puzzle icon in your browser toolbar, pin the Mikeybox Custom Themes extension, and click it to open the theme selector popup.</p>
+        </div>
+
+        <div class="qa-item">
+          <h4>Q: Does it work on Firefox or Safari?</h4>
+          <p>A: Yes, it is based for all browsers! Firefox supports temporary add-ons via `about:debugging`, and Safari users can convert the extension package effortlessly.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Other Mikeybox Extensions Button -->
+    <div class="extensions-action-box">
+      <a href="https://github.com/sakuraishere67" target="_blank" class="btn-other">
+        ✦ Other Mikeybox Extensions
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    Unofficial fan project for the Animal Company community. Not affiliated with Mikeybox, Wooster Games, Meta, Google or NVIDIA. Use at your own risk.
+  </footer>
+
+  <script>
+    // Generate floating sakura petals dynamically
+    const petalsContainer = document.getElementById('petals');
+    const petalCount = 25;
+    
+    for (let i = 0; i < petalCount; i++) {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      const size = Math.random() * 10 + 8;
+      petal.style.width = `${size}px`;
+      petal.style.height = `${size * 1.4}px`;
+      petal.style.left = `${Math.random() * 100}vw`;
+      petal.style.top = `${-20 - Math.random() * 20}vh`;
+      petal.style.animationDuration = `${Math.random() * 6 + 6}s`;
+      petal.style.animationDelay = `${Math.random() * 5}s`;
+      petalsContainer.appendChild(petal);
+    }
+  </script>
+</body>
+</html>
